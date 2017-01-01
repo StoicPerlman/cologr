@@ -19,16 +19,16 @@ func main() {
 	s1 := rand.NewSource(time.Now().UnixNano())
     r1 := rand.New(s1)
 
-	levels := []string{"DEBUG", "INFO", "WARN", "ERROR", "NO MATCH"}
+	levels := []string{"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "NO MATCH"}
 
 	for i := 1; i <= getNumLinesToGen(); i++ {
-		randNum := r1.Intn(8)
+		randNum := r1.Intn(10)
 		var randLevel string
 
-		if randNum < 4 {
+		if randNum < 6 {
 			randLevel = levels[randNum]
 		} else {
-			randLevel = levels[4]
+			randLevel = levels[6]
 		}
 
 		lineNum := strconv.Itoa(i)
