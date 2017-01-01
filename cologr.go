@@ -49,7 +49,7 @@ func getDefaultRegexMatchers() []CologrLevel {
 		},
 		CologrLevel {
 			regexp: warn,
-			color: color.New(color.FgHiRed).PrintlnFunc(),
+			color: color.New(color.FgMagenta).PrintlnFunc(),
 		},
 		CologrLevel {
 			regexp: error,
@@ -57,7 +57,7 @@ func getDefaultRegexMatchers() []CologrLevel {
 		},
 		CologrLevel {
 			regexp: fatal,
-			color: color.New(color.FgMagenta).PrintlnFunc(),
+			color: color.New(color.FgHiRed).PrintlnFunc(),
 		},
 		CologrLevel {
 			regexp: trace,
