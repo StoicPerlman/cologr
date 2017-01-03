@@ -1,4 +1,4 @@
-package main
+package genlog
 import "os"
 import "strconv"
 import "strings"
@@ -8,7 +8,7 @@ import "math/rand"
 import "time"
 
 func main() {
-    f, err := os.OpenFile("test.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+    f, err := os.OpenFile("../test.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 	    panic(err)
 	}
@@ -20,6 +20,9 @@ func main() {
     r1 := rand.New(s1)
 
 	levels := []string{"TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "NO MATCH"}
+
+	// tmp := []int{1,2,3,4,5,6,7,8,9,0}
+	// count := 0
 
 	for i := 1; i <= getNumLinesToGen(); i++ {
 		randNum := r1.Intn(10)
@@ -34,6 +37,11 @@ func main() {
 		lineNum := strconv.Itoa(i)
 
 		logLine :=  lineNum + " - " + randLevel + " - " + uuid + "\n"
+		// logLine = strconv.Itoa(tmp[count]) + "\n"
+		// count++
+		// if (count > 9) {
+		// 	count = 0
+		// }
 		if _, err = f.WriteString(logLine); err != nil {
 		    panic(err)
 		}
