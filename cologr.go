@@ -9,7 +9,7 @@ import "github.com/fatih/color"
 
 type CologrLevel struct {
 	regexp *regexp.Regexp
-	color func(a ...interface{})
+	color  func(a ...interface{})
 }
 
 func main() {
@@ -23,15 +23,15 @@ func main() {
 	filename := args[0]
 
 	startPos := &tail.SeekInfo{Offset: 0, Whence: io.SeekEnd}
-    t, err := tail.TailFile(filename, tail.Config{
-    	Location: startPos, 
-    	Follow: true, 
-    	ReOpen: true, 
-    	Poll: true,
-    })
+	t, err := tail.TailFile(filename, tail.Config{
+		Location: startPos,
+		Follow:   true,
+		ReOpen:   true,
+		Poll:     true,
+	})
 
-    cologrLevels := getDefaultRegexMatchers()
-    printer := color.New(color.FgWhite).PrintlnFunc()
+	cologrLevels := getDefaultRegexMatchers()
+	printer := color.New(color.FgWhite).PrintlnFunc()
 
 	for line := range t.Lines {
 
@@ -44,7 +44,7 @@ func main() {
 
 		printer(line.Text)
 	}
-	fmt.Println(err);
+	fmt.Println(err)
 }
 
 func getDefaultRegexMatchers() []CologrLevel {
@@ -55,30 +55,30 @@ func getDefaultRegexMatchers() []CologrLevel {
 	error := regexp.MustCompile("(?i)ERROR")
 	fatal := regexp.MustCompile("(?i)FATAL")
 
-	return []CologrLevel {
-		CologrLevel {
+	return []CologrLevel{
+		CologrLevel{
 			regexp: debug,
-			color: color.New(color.FgCyan).PrintlnFunc(),
+			color:  color.New(color.FgCyan).PrintlnFunc(),
 		},
-		CologrLevel {
+		CologrLevel{
 			regexp: info,
-			color: color.New(color.FgGreen).PrintlnFunc(),
+			color:  color.New(color.FgGreen).PrintlnFunc(),
 		},
-		CologrLevel {
+		CologrLevel{
 			regexp: warn,
-			color: color.New(color.FgMagenta).PrintlnFunc(),
+			color:  color.New(color.FgMagenta).PrintlnFunc(),
 		},
-		CologrLevel {
+		CologrLevel{
 			regexp: error,
-			color: color.New(color.FgRed).PrintlnFunc(),
+			color:  color.New(color.FgRed).PrintlnFunc(),
 		},
-		CologrLevel {
+		CologrLevel{
 			regexp: fatal,
-			color: color.New(color.FgHiRed).PrintlnFunc(),
+			color:  color.New(color.FgHiRed).PrintlnFunc(),
 		},
-		CologrLevel {
+		CologrLevel{
 			regexp: trace,
-			color: color.New(color.FgYellow).PrintlnFunc(),
+			color:  color.New(color.FgYellow).PrintlnFunc(),
 		},
 	}
 }
