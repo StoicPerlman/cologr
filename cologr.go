@@ -3,6 +3,7 @@ package main
 import "fmt"
 import "regexp"
 import "io"
+import "os"
 import "github.com/hpcloud/tail"
 import "github.com/fatih/color"
 
@@ -12,6 +13,15 @@ type CologrLevel struct {
 }
 
 func main() {
+	args := os.Args[1:]
+
+	if len(args) < 1 {
+		fmt.Println("must enter file to log")
+		return
+	}
+
+	filename := args[0]
+
 	startPos := &tail.SeekInfo{Offset: 0, Whence: io.SeekEnd}
     t, err := tail.TailFile(filename, tail.Config{
     	Location: startPos, 
