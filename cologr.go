@@ -28,6 +28,7 @@ func main() {
 		Follow:   true,
 		ReOpen:   true,
 		Poll:     true,
+		Logger:   tail.DiscardingLogger,
 	})
 
 	cologrLevels := getDefaultRegexMatchers()
