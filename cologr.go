@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 import "regexp"
+import "io"
 import "github.com/hpcloud/tail"
 import "github.com/fatih/color"
 
@@ -11,7 +12,13 @@ type CologrLevel struct {
 }
 
 func main() {
-    t, err := tail.TailFile("./test.log", tail.Config{Follow: true, Poll: true})
+	startPos := &tail.SeekInfo{Offset: 0, Whence: io.SeekEnd}
+    t, err := tail.TailFile(filename, tail.Config{
+    	Location: startPos, 
+    	Follow: true, 
+    	ReOpen: true, 
+    	Poll: true,
+    })
 
     cologrLevels := getDefaultRegexMatchers()
     printer := color.New(color.FgWhite).PrintlnFunc()
