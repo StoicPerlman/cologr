@@ -49,12 +49,12 @@ func main() {
 }
 
 func getDefaultRegexMatchers() []CologrLevel {
-	trace := regexp.MustCompile("(?i)TRACE")
-	debug := regexp.MustCompile("(?i)DEBUG")
-	info := regexp.MustCompile("(?i)INFO")
-	warn := regexp.MustCompile("(?i)WARN")
-	error := regexp.MustCompile("(?i)ERROR")
-	fatal := regexp.MustCompile("(?i)FATAL")
+	trace := regexp.MustCompile(`\b(?i)TRACE\b`)
+	debug := regexp.MustCompile(`\b(?i)DEBUG\b`)
+	info := regexp.MustCompile(`\b(?i)INFO\b`)
+	warn := regexp.MustCompile(`\b(?i)WARN\b`)
+	error := regexp.MustCompile(`\b(?i)ERROR\b`)
+	fatal := regexp.MustCompile(`\b(?i)FATAL\b`)
 
 	return []CologrLevel{
 		CologrLevel{
